@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>투자내역 페이지</title>
+  <!-- 외부 CSS 파일 연결 (styles.css) -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- 헤더 영역 -->
+  <header>
+    <nav class="navbar">
+      <ul>
+        <!-- 홈 버튼 -->
+        <li><a href="index.html">홈</a></li>
+        <!-- 투자내역 버튼 -->
+        <li><a href="investments.html">투자내역</a></li>
+        <!-- 입출금 버튼 -->
+        <li><a href="deposit.html">입출금</a></li>
+        <!-- 사용설명서 버튼 -->
+        <li><a href="manual.html">사용설명서</a></li>
+        <!-- 설정 버튼 -->
+        <li><a href="settings.html">설정</a></li>
+        <!-- 내정보 버튼 -->
+        <li><a href="myinfo.html">내정보</a></li>
+        <!-- 회원가입 버튼 -->
+        <li><a href="signup.html">회원가입</a></li>
+        <!-- 로그인 / 로그아웃 버튼 
+             - 실제로는 로그인 여부에 따라 토글되도록 자바스크립트로 제어할 수 있음 -->
+        <li><a href="login.html" id="loginLink">로그인</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- 요약 정보 섹션 (총 투자자산, 예수금 등) -->
+  <section class="info-section">
+    <div class="asset-info">
+      <p>총 투자자산: <span id="total-assets">0</span> KRW</p>
+      <p>예수금: <span id="available-balance">0</span> KRW</p>
+    </div>
+    <div class="login-logout">
+      <!-- 로그인/로그아웃 상태에 따라 버튼을 변경하고 싶다면 자바스크립트로 구현 -->
+      <!-- 예: 로그인 전에는 로그인 버튼만 보이도록, 로그인 후에는 로그아웃 버튼만 보이도록 -->
+      <button id="loginBtn">로그인</button>
+      <!-- <button id="logoutBtn" style="display: none;">로그아웃</button> -->
+    </div>
+  </section>
+
+  <!-- 메인 영역 -->
+  <main>
+    <!-- 왼쪽 패널: 거래내역, 미체결, 입출금대기, 투자손익 등의 탭 -->
+    <aside class="left-panel">
+      <div class="tabs">
+        <button class="tab-btn" data-target="history">거래내역</button>
+        <button class="tab-btn" data-target="open-orders">미체결</button>
+        <button class="tab-btn" data-target="pending-deposit">입출금대기</button>
+        <button class="tab-btn" data-target="profit-loss">투자손익</button>
+      </div>
+      <div class="search-section">
+        <!-- 개월 단위 선택 -->
+        <select id="monthSelect">
+          <option value="1">1개월</option>
+          <option value="3">3개월</option>
+          <option value="6">6개월</option>
+        </select>
+        <!-- 매수/매도 등 종류 선택 -->
+        <select id="typeSelect">
+          <option value="all">전체</option>
+          <option value="buy">매수</option>
+          <option value="sell">매도</option>
+        </select>
+        <!-- 코인명 검색 -->
+        <input type="text" id="coinSearch" placeholder="코인명 검색">
+        <button id="searchBtn">검색</button>
+      </div>
+    </aside>
+
+    <!-- 중앙 패널: 탭에 따라 아래 영역에 목록 표시 -->
+    <section class="center-panel">
+      <!-- 거래내역 -->
+      <div id="history" class="content-box active">
+        <h3>거래내역</h3>
+        <ul id="historyList">
+          <!-- 거래내역 목록이 동적으로 표시될 영역 -->
+        </ul>
+      </div>
+      <!-- 미체결 -->
+      <div id="open-orders" class="content-box">
+        <h3>미체결</h3>
+        <ul id="openOrdersList">
+          <!-- 미체결 목록 -->
+        </ul>
+      </div>
+      <!-- 입출금대기 -->
+      <div id="pending-deposit" class="content-box">
+        <h3>입출금대기</h3>
+        <ul id="pendingDepositList">
+          <!-- 입출금 대기 목록 -->
+        </ul>
+      </div>
+      <!-- 투자손익 -->
+      <div id="profit-loss" class="content-box">
+        <h3>투자손익</h3>
+        <ul id="profitLossList">
+          <!-- 투자손익 목록 -->
+        </ul>
+      </div>
+    </section>
+
+    <!-- 오른쪽 패널: 내가 투자한 코인 목록 -->
+    <aside class="right-panel">
+      <h3>보유 자산</h3>
+      <p>총 보유자산: <span id="totalHoldings">0</span> KRW</p>
+      <p>보유 KRW: <span id="krwBalance">0</span> KRW</p>
+      <ul id="coinHoldingsList">
+        <!-- 내가 투자한 코인 목록 -->
+      </ul>
+    </aside>
+  </main>
+
+  <!-- JS 파일 연결 (script.js) -->
+  <script src="script.js"></script>
+</body>
+</html>
