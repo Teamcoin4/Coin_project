@@ -1,0 +1,140 @@
+/* 초기화 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: sans-serif;
+    color: #333;
+  }
+  
+  /* 네비게이션 바 스타일 */
+  .navbar {
+    background-color: #f0f0f0;
+    padding: 10px;
+  }
+  .navbar ul {
+    list-style: none;
+    display: flex;
+    gap: 10px;
+  }
+  .navbar li {
+    display: inline-block;
+  }
+  .navbar a {
+    text-decoration: none;
+    color: #333;
+    padding: 6px 12px;
+    transition: background-color 0.2s;
+  }
+  .navbar a:hover {
+    background-color: #ddd;
+  }
+  
+  /* 요약 정보 섹션(총 투자자산, 예수금 등) */
+  .info-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #fafafa;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+  }
+  .asset-info p {
+    margin-bottom: 5px;
+  }
+  .login-logout button {
+    padding: 6px 12px;
+    cursor: pointer;
+  }
+  
+  /* 메인 레이아웃 */
+  main {
+    display: flex;
+    padding: 20px;
+    gap: 20px;
+  }
+  
+  /* 왼쪽 패널 (탭, 검색) */
+  .left-panel {
+    width: 20%;
+    min-width: 200px;
+    border-right: 1px solid #ddd;
+    padding-right: 10px;
+  }
+  .tabs {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  .tab-btn {
+    padding: 10px;
+    border: none;
+    background-color: #eee;
+    cursor: pointer;
+    text-align: left;
+    transition: background-color 0.2s;
+  }
+  .tab-btn:hover {
+    background-color: #ddd;
+  }
+  .search-section {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .search-section select,
+  .search-section input,
+  .search-section button {
+    padding: 6px;
+    border: 1px solid #ccc;
+  }
+  
+  /* 중앙 패널 (탭 내용) */
+  .center-panel {
+    width: 50%;
+    min-width: 400px;
+    border-right: 1px solid #ddd;
+    padding: 0 10px;
+  }
+  .content-box {
+    display: none; /* 기본적으로 감춤 */
+  }
+  .content-box.active {
+    display: block; /* 선택된 탭만 보이도록 */
+  }
+  .content-box h3 {
+    margin-bottom: 10px;
+  }
+  .content-box ul {
+    list-style: none;
+    border-top: 1px solid #ccc;
+    padding-top: 10px;
+  }
+  .content-box li {
+    padding: 5px 0;
+    border-bottom: 1px solid #eee;
+  }
+  
+  /* 오른쪽 패널 (보유 코인 목록) */
+  .right-panel {
+    width: 30%;
+    min-width: 250px;
+    padding-left: 10px;
+  }
+  .right-panel h3 {
+    margin-bottom: 10px;
+  }
+  .right-panel ul {
+    list-style: none;
+    border-top: 1px solid #ccc;
+    padding-top: 10px;
+  }
+  .right-panel li {
+    padding: 5px 0;
+    border-bottom: 1px solid #eee;
+  }
+  
