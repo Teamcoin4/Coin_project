@@ -1,9 +1,38 @@
 
-console.log("코인 자산 관리 페이지 스크립트 로드됨.");
+// 1) 예산 초기화 기능
+const budgetValue = document.getElementById("budgetValue");
+const resetBudgetBtn = document.getElementById("resetBudgetBtn");
 
-// 예: 검색 기능을 구현하려면 아래와 같이 작성할 수 있음
-// const coinSearchInput = document.querySelector('.coin-search input');
-// coinSearchInput.addEventListener('input', (e) => {
-//   console.log('검색어:', e.target.value);
-//   // 실시간 검색 기능 등 구현
-// });
+resetBudgetBtn.addEventListener("click", () => {
+  // 실제 로직에 맞게 예산을 재설정
+  budgetValue.textContent = "0";
+  alert("예산이 초기화되었습니다.");
+});
+
+// 2) 언어 변경 기능
+const languageValue = document.getElementById("languageValue");
+const changeLanguageBtn = document.getElementById("changeLanguageBtn");
+
+changeLanguageBtn.addEventListener("click", () => {
+  // 실제 로직에 맞게 언어를 변경
+  if (languageValue.textContent === "Korean") {
+    languageValue.textContent = "English";
+  } else {
+    languageValue.textContent = "Korean";
+  }
+  alert(`언어가 ${languageValue.textContent}로 변경되었습니다.`);
+});
+
+// 3) 모드 변경 기능
+const modeValue = document.getElementById("modeValue");
+const changeModeBtn = document.getElementById("changeModeBtn");
+
+changeModeBtn.addEventListener("click", () => {
+  // 실제 로직에 맞게 모드를 변경
+  if (modeValue.textContent === "○○모드") {
+    modeValue.textContent = "▲▲모드";
+  } else {
+    modeValue.textContent = "○○모드";
+  }
+  alert(`모드가 ${modeValue.textContent}로 변경되었습니다.`);
+});
