@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <title>코인 자산 관리</title>
+  <!-- 외부 CSS 연결 -->
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <!-- 상단 메뉴 영역 -->
+  <header>
+    <nav>
+      <ul class="left-menu">
+        <li><a href="#">홈</a></li>
+        <li><a href="#">투자내역</a></li>
+        <li><a href="#">입출금</a></li>
+        <li><a href="#">사용설명서</a></li>
+        <li><a href="#">설정</a></li>
+        <li><a href="#">회원가입</a></li>
+      </ul>
+      <ul class="right-menu">
+        <li><a href="#">로그인</a></li>
+        <li><a href="#">로그아웃</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- 메인 컨테이너 -->
+  <main>
+    <!-- 좌측 패널 -->
+    <section class="left-panel">
+      <!-- 총 보유자산 -->
+      <div class="asset-summary">
+        <h2>총 보유자산</h2>
+        <p>0 원</p>
+      </div>
+
+      <!-- 코인 검색 -->
+      <div class="coin-search">
+        <h3>코인 검색</h3>
+        <input type="text" placeholder="코인명을 입력하세요" />
+      </div>
+
+      <!-- 보유 코인 목록 -->
+      <div class="coin-holdings">
+        <h3>보유코인 / 매수평균가 / 시총 순위(가치평가)</h3>
+        <ul>
+          <li>목록</li>
+          <li>목록</li>
+          <li>목록</li>
+        </ul>
+      </div>
+
+      <!-- 예시로 추가: 다른 정보나 보유 내역이 더 필요하다면 확장 -->
+      <div class="extra-info">
+        <h3>추가 정보 (예시)</h3>
+        <ul>
+          <li>목록</li>
+          <li>목록</li>
+          <li>목록</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- 우측 패널 -->
+    <section class="right-panel">
+      <!-- 거래내역 -->
+      <div class="transaction-history">
+        <h3>거래내역</h3>
+        <ul>
+          <li>
+            <span>15:13</span>
+            <span>입금 완료</span>
+            <span>59,274원</span>
+          </li>
+          <li>
+            <span>15:13</span>
+            <span>출금 완료</span>
+            <span>59,274원</span>
+          </li>
+          <!-- 필요한 만큼 항목 추가 -->
+        </ul>
+      </div>
+
+      <!-- 내역 / 입금 / 출금 버튼 -->
+      <div class="transaction-actions">
+        <button>내역</button>
+        <button>입금</button>
+        <button>출금</button>
+      </div>
+    </section>
+  </main>
+
+  <!-- 외부 스크립트 연결 -->
+  <script src="script.js"></script>
+</body>
+</html>
