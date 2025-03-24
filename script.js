@@ -1,3 +1,6 @@
+
+
+
 // DOM이 모두 로드된 뒤 실행
 document.addEventListener("DOMContentLoaded", () => {
     // 탭 전환 기능
@@ -109,4 +112,3 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     }
   });
-  
