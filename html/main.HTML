@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>코인 거래 메인페이지</title>
+    <link rel="stylesheet" href="styles.css" />
+    <!-- 스타일 파일 연결 -->
+  </head>
+  <body>
+    <header>
+      <nav>
+        <ul>
+          <li><a href="#">홈</a></li>
+          <li><a href="#">투자내역</a></li>
+          <li><a href="#">입출금</a></li>
+          <li><a href="#">사용 설명서</a></li>
+          <li><a href="#">설정</a></li>
+          <li><a href="#">내 정보</a></li>
+          <li><a href="#">로그인/로그아웃</a></li>
+          <li><a href="#">회원가입</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main>
+      <aside class="coin-list">
+        <h2>코인 목록</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>코인명</th>
+              <th>현재가</th>
+              <th>전일대비</th>
+              <th>거래금</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- 코인 데이터 들어갈 부분 -->
+          </tbody>
+        </table>
+      </aside>
+
+      <section class="coin-graph">
+        <h1>코인 그래프</h1>
+        <!-- 그래프 자리 -->
+      </section>
+
+      <section class="coin-details">
+        <div class="mini-info">
+          <button>선택 코인 시세</button>
+          <button>고가 / 저가</button>
+          <button>미니 그래프</button>
+          <button>거래량 / 거래대금</button>
+        </div>
+      </section>
+
+      <section class="trade-panel">
+        <h2>보유자산</h2>
+        <div class="trade-actions">
+          <button>매수</button>
+          <button>매도</button>
+        </div>
+        <div class="trade-form">
+          <label>가격</label>
+          <input type="number" placeholder="금액 입력" />
+          <label>수량</label>
+          <input type="number" placeholder="직접 입력" />
+          <div class="percentage-buttons">
+            <button>10%</button>
+            <button>25%</button>
+            <button>50%</button>
+            <button>100%</button>
+          </div>
+          <label>총액</label>
+          <input type="text" disabled />
+          <button>매수 / 매도</button>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>
