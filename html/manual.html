@@ -3,52 +3,76 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>입출금 연습</title>
-    <link rel="stylesheet" href="styles.css" />
+    <title>입출금 연습 페이지</title>
+    <link rel="stylesheet" href="/css/manual.css" />
   </head>
   <body>
-    <div class="container">
-      <div class="nav">
-        <a href="#">홈</a>
-        <a href="#">투자내역</a>
-        <a href="#">입출금</a>
-        <a href="#">사용 설명서</a>
-        <a href="#">설정</a>
-        <a href="#">내 정보</a>
-        <a href="#">로그인/로그아웃</a>
-        <a href="#">회원가입</a>
-      </div>
+    <div class="main-container">
+      <nav class="nav-bar">
+        <button>홈</button>
+        <button>투자내역</button>
+        <button>입출금</button>
+        <button>사용 설명서</button>
+        <button>설정</button>
+        <button>내 정보</button>
+        <button>로그인/로그아웃</button>
+        <button>회원가입</button>
+      </nav>
 
-      <div class="content">
-        <div class="box">입/출금 연습</div>
-        <div class="box">입/출금 설명</div>
-      </div>
+      <div class="main-grid">
+        <!-- 입출금 연습 -->
+        <div class="practice-box">
+          <div class="practice-title">입/출금 연습</div>
 
-      <div class="practice-area">
-        <button>매수 매도 연습</button>
-        <div>
-          <label>보유자산:</label>
-          <button>매수</button>
-          <button>매도</button>
+          <h3 class="section-title">매수 매도 연습</h3>
+          <div class="trade-box">
+            <div class="form-group">
+              <label>보유자산:</label>
+            </div>
+
+            <div class="form-group">
+              <label>가격:</label>
+              <input type="text" placeholder="금액" />
+              <button>-</button>
+              <button>+</button>
+            </div>
+
+            <div class="form-group">
+              <label>수량:</label>
+              <div class="percent-buttons">
+                <button>10%</button>
+                <button>25%</button>
+                <button>50%</button>
+                <button>100%</button>
+                <input type="text" placeholder="직접입력" />
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label>총액:</label>
+              <input type="text" />
+            </div>
+
+            <div class="form-group">
+              <button class="action-btn">매수</button>
+              <button class="action-btn">매도</button>
+            </div>
+          </div>
         </div>
-        <div>
-          <label>가격:</label>
-          <input type="text" placeholder="금액" />
-          <button>-</button>
-          <button>+</button>
+
+        <!-- 입출금 설명 -->
+        <div class="explanation-box">
+          <div class="practice-title">입/출금 설명</div>
+          <p class="long-description">
+            이곳은 입출금에 대한 상세 설명이 들어가는 영역입니다. 아래로 내용이
+            길어질 수 있도록 설계되었습니다.<br /><br />
+            사용자는 이곳에서 입금과 출금의 의미, 절차, 주의사항 등을 충분히
+            학습할 수 있습니다.<br /><br />
+            예: 입금은 보유자산 증가를 의미하며, 출금은 반대로 자산이 감소하는
+            행위입니다. 또한 실전 거래 전 이 과정을 반복 연습하면 효과적입니다.
+          </p>
         </div>
-        <div>
-          <label>수량:</label>
-          <button>10%</button>
-          <button>25%</button>
-          <button>50%</button>
-          <button>100%</button>
-          <input type="text" placeholder="직접입력" />
-        </div>
-        <div>
-          <label>총액:</label>
-          <input type="text" />
-        </div>
-        <button>매수 / 매도</button>
+      </div>
+    </div>
   </body>
 </html>
