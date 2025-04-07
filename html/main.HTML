@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>코인 거래 메인페이지</title>
+    <link rel="stylesheet" href="../css/main.css" />
+  </head>
+  <body>
+    <header>
+      <nav>
+        <ul>
+          <li><a href="#">홈</a></li>
+          <li><a href="#">투자내역</a></li>
+          <li><a href="#">입출금</a></li>
+          <li><a href="#">사용 설명서</a></li>
+          <li><a href="#">설정</a></li>
+          <li><a href="#">내 정보</a></li>
+          <li><a href="#">로그인/로그아웃</a></li>
+          <li><a href="#">회원가입</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main>
+      <!-- 왼쪽 열 상단: 메인 그래프 -->
+      <section class="coin-graph">
+        <h1>코인 그래프</h1>
+        <!-- 메인 그래프 자리 -->
+      </section>
+
+      <!-- 오른쪽 열: 코인 목록 (전체 높이 사용) -->
+      <aside class="coin-list">
+        <h2>코인 목록</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>코인명</th>
+              <th>현재가</th>
+              <th>전일대비</th>
+              <th>거래금</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- 코인 데이터 들어갈 부분 -->
+          </tbody>
+        </table>
+      </aside>
+
+      <!-- 왼쪽 열 하단 영역: 미니 그래프 및 보유자산 -->
+      <div class="bottom-panel">
+        <!-- 미니 그래프 / 코인 상세 정보 -->
+        <section class="coin-details">
+          <div class="mini-info">
+            <h3>미니 그래프</h3>
+            <canvas id="mini-graph"></canvas>
+          </div>
+          <div class="coin-data">
+            <p><strong>고가:</strong> <span id="high-price">0</span></p>
+            <p><strong>저가:</strong> <span id="low-price">0</span></p>
+            <p><strong>거래량:</strong> <span id="volume">0</span></p>
+            <p><strong>거래대금:</strong> <span id="turnover">0</span></p>
+          </div>
+        </section>
+
+        <!-- 보유자산 및 거래 패널 -->
+        <section class="trade-panel">
+          <h2>보유자산</h2>
+          <div class="trade-buttons">
+            <button class="buy-btn">매수</button>
+            <button class="sell-btn">매도</button>
+          </div>
+          <div class="trade-form">
+            <div class="input-group">
+              <label>가격</label>
+              <input type="number" placeholder="금액 입력" />
+              <div class="adjust-buttons">
+                <button>-</button>
+                <button>+</button>
+              </div>
+            </div>
+            <div class="input-group">
+              <label>수량</label>
+              <input type="number" placeholder="직접 입력" />
+            </div>
+            <div class="percentage-buttons">
+              <button>10%</button>
+              <button>25%</button>
+              <button>50%</button>
+              <button>100%</button>
+            </div>
+            <div class="input-group">
+              <label>총액</label>
+              <input type="text" disabled />
+            </div>
+            <button class="trade-action">매수 / 매도</button>
+          </div>
+        </section>
+      </div>
+    </main>
+  </body>
+</html>
