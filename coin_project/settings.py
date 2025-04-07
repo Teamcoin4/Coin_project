@@ -84,14 +84,14 @@ WSGI_APPLICATION = 'coin_project.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'coin',
-        'USER': 'root',
-        'PASSWORD': '3927',
-        'HOST': '127.0.0.1',
-        'PORT': '3306',
+        'ENGINE': '',
+        'NAME': '',
+        'USER': '',
+        'PASSWORD': '',
+        'HOST': '',
+        'PORT': '',
         'OPTIONS': {
-            'init_command': 'SET sql_mode="STRICT_TRANS_TABLES"'
+            ''
         }
     }
 }
