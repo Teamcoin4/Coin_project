@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>내 정보의 페이지</title>
+  <link rel="stylesheet" href="../css/Mypage.css">
+</head>
+<body>
+  <!-- 상단 영역 -->
+  <header class="header">
+    <nav>
+      <ul class="left-menu">
+        <li><a href="#">홈</a></li>
+          <li><a href="#">투자내역</a></li>
+          <li><a href="#">입출금</a></li>
+          <li><a href="#">사용 설명서</a></li>
+          <li><a href="#">설정</a></li>
+          <li><a href="#">내 정보</a></li>
+          <li><a href="#">로그인/로그아웃</a></li>
+          <li><a href="#">회원가입</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- 메인 콘텐츠 영역 -->
+  <main class="main-container">
+    <!-- 프로필, 닉네임, 비밀번호 수정 -->
+    <section class="profile-section">
+      <div class="profile-photo">
+        <!-- 실제 이미지가 없으므로 예시용으로 색상박스 -->
+        <div class="photo-placeholder">프로필 사진</div>
+      </div>
+      <div class="profile-info">
+        <div class="nickname-field">
+          <label for="nickname">닉네임</label>
+          <input type="text" id="nickname" placeholder="닉네임을 입력하세요">
+        </div>
+        <div class="profile-actions">
+          <button id="btn-change-nickname" class="btn">닉네임 변경</button>
+          <button id="btn-change-password" class="btn">비밀번호 수정</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- 계정 상태 (활성화/비활성화) -->
+    <section class="account-status-section">
+      <h2>계정 상태 (활성화/비활성화)</h2>
+      <button id="btn-account-toggle" class="btn">활성화 하기</button>
+      <!-- 예시로 단순히 버튼 텍스트만 토글할 예정 -->
+    </section>
+
+    <!-- 알림 설정 -->
+    <section class="alert-settings-section">
+      <h2>알림 수신 여부 (이메일, SMS)</h2>
+      <div class="alert-receive-options">
+        <label>
+          <input type="radio" name="alert-receive" value="yes" checked>
+          예
+        </label>
+        <label>
+          <input type="radio" name="alert-receive" value="no">
+          아니오
+        </label>
+      </div>
+
+      <div class="alert-types">
+        <label>
+          <input type="checkbox" name="alert-types" value="transaction" checked>
+          거래 알림
+        </label>
+        <label>
+          <input type="checkbox" name="alert-types" value="repeat" checked>
+          반복 알림
+        </label>
+        <label>
+          <input type="checkbox" name="alert-types" value="security" checked>
+          보안 알림
+        </label>
+      </div>
+    </section>
+  </main>
+
+  <!-- 자바스크립트 -->
+  <script src="../js/Mypage.js"></script>
+</body>
+</html>
