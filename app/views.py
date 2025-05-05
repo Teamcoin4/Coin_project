@@ -1,127 +1,132 @@
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth import authenticate, login as auth_login
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
-from django.http import JsonResponse
-from django.views import View
 from django.contrib import messages
+from django.contrib.auth import get_user_model
 from app.models import User
-import json
+from social_django.models import UserSocialAuth
+from social_django.utils import psa
 
 # Create your views here.
 
+User = get_user_model()
+
 # 메인 페이지 호출
+# @login_required(login_url='login_page')  # 로그인 안 했으면 이 URL로 리다이렉트
 def main_page(request):
-    return render(request, 'main_page.html')
+    user = request.user  # 인증된 사용자 객체 가져오기
+
+    # 메시지를 띄우거나 다른 로직 필요하면 추가 가능
+    context = {
+        'user': user
+    }
+    return render(request, 'main_page.html', context)
 
 # 로그인 페이지 호출
 def login_page(request):
     return render(request, 'login_page.html')
 
-# 로그인 데이터 처리
+# 로그인 데이터 처리 (로컬 로그인)
 def login(request):
     if request.method == 'POST':
-        print('login POST 요청처리')
-        loginID = request.POST.get('loginID')
-        loginPW = request.POST.get('loginPW')
-        
+        login_id = request.POST.get('login_id')
+        login_pw = request.POST.get('login_pw')
+
         try:
-            # 데이터베이스에서 사용자 조회 (Register 모델 사용)
-            user = User.objects.get(user_id=loginID)
-            
-            # 비밀번호 확인
-            if user.user_pw == loginPW:  # 실제 환경에서는 암호화된 비밀번호 비교 필요
-                # 로그인 성공 - 세션에 사용자 정보 저장
-                request.session['user_id'] = user.user_id
-                request.session['user_name'] = user.user_name
-                request.session['is_admin'] = user.is_admin
-                request.session['is_logged_in'] = True
-                
-                print('@@@@@@@@@@@@@@@@@@@@@@로그인 성공@@@@@@@@@@@@@@@@@@@@@@')
-                return redirect('main_page')  # 메인 페이지로 리다이렉트
-            else:
-                # 비밀번호 불일치
-                print('@@@@@@@@@@@@@@@@@@@@@@비밀번호 불일치@@@@@@@@@@@@@@@@@@@@@@')
-                messages.error(request, '비밀번호가 일치하지 않습니다.')
-                return render(request, 'login_page.html')
-                
+            user = User.objects.get(user_id=login_id)
         except User.DoesNotExist:
-            # 사용자 ID 없음
-            print('@@@@@@@@@@@@@@@@@@@@@@사용자 ID 없음@@@@@@@@@@@@@@@@@@@@@@')
-            messages.error(request, '존재하지 않는 사용자 ID입니다.')
+            messages.error(request, '존재하지 않는 아이디입니다.')
+            return render(request, 'login_page.html')
+
+        # 비밀번호 비교
+        if user.check_password(login_pw):
+            auth_login(request, user)
+            messages.success(request, '로그인 성공!')
+            return redirect('main_page')
+        else:
+            messages.error(request, '비밀번호가 올바르지 않습니다.')
             return render(request, 'login_page.html')
     else:
-        # GET 요청
-        print('@@@@@@@@@@@@@@@@@@@@@@로그인 페이지 로드@@@@@@@@@@@@@@@@@@@@@@')
         return render(request, 'login_page.html')
+
+# 구글 로그인 완료 후 처리 (소셜 로그인)
+@psa('social:complete')  # social_django의 'complete' URL을 처리하는 데코레이터
+def complete_google(request, backend):
+    user = request.user
+    if not user.is_authenticated:
+        messages.error(request, "구글 로그인에 실패했습니다.")
+        return redirect('login_page')
+
+    # 소셜 로그인 정보를 가져옴 (구글 로그인 후 이메일을 가져오기)
+    social_user = user.social_auth.get(provider='google')
+
+    # 구글 이메일을 user_id로 사용하기
+    email = social_user.extra_data.get('email', None)
+    if not email:
+        messages.error(request, '구글 계정에 이메일이 없습니다.')
+        return redirect('login_page')
+
+    # 이메일을 user_id로 설정하고 로그인 처리
+    user.user_id = email
+    user.save()
+    
+    # 로그인 성공 후 메인 페이지로 리다이렉트
+    auth_login(request, user)
+    messages.success(request, '구글 로그인 성공!')
+    return redirect('main_page')
 
 # 로그아웃 기능
 def logout(request):
-    # 세션에서 사용자 정보 제거
-    if 'user_id' in request.session:
-        del request.session['user_id']
-    if 'user_name' in request.session:
-        del request.session['user_name']
-    if 'is_admin' in request.session:
-        del request.session['is_admin']
-    if 'is_logged_in' in request.session:
-        del request.session['is_logged_in']
-    
-    # 로그인 페이지로 리다이렉트
-    return redirect('main_page')
-
-# 메인 페이지 함수
-def main_page(request):
-    # 로그인 상태 확인
-    if not request.session.get('is_logged_in', False):
-        messages.error(request, '로그인이 필요합니다.')
-        return redirect('login')
-    
-    # 로그인된 사용자 정보 가져오기
-    user_id = request.session.get('user_id')
-    
-    try:
-        user = User.objects.get(user_id=user_id)
-        context = {
-            'user': user
-        }
-        return render(request, 'main_page.html', context)
-    except User.DoesNotExist:
-        # 세션에 있는 사용자 정보가 DB에 없는 경우
-        messages.error(request, '사용자 정보가 유효하지 않습니다.')
-        return redirect('login')
-
+    request.session.flush()  # 모든 세션 데이터를 한 줄로 제거
+    return redirect('login_page')
 
 # 회원가입 페이지 호출
 def register_page(request):
-    context = {}
-    return render(request, 'register_page.html', context)
+    return render(request, 'register_page.html')
 
 # 회원가입 데이터 처리
 def register(request):
     if request.method == 'POST':
-        print('register POST 요청처리')
-        registerID = request.POST.get('registerID')
-        registerPW = request.POST.get('registerPW')
-        registerNAME = request.POST.get('registerNAME')
-        registerAdmin = request.POST.get('is_admin', False)  # 값이 없으면 False로 설정
-        
-        # 이미 존재하는 ID인지 확인
-        if User.objects.filter(user_id=registerID).exists():
+        register_id = request.POST.get('register_id')
+        register_pw = request.POST.get('register_pw')
+        register_name = request.POST.get('register_name')
+        is_admin = request.POST.get('is_admin') == 'True'  # 체크박스를 통해 받은 관리자 권한
+
+        # 필수 항목 확인
+        if not register_id or not register_pw or not register_name:
+            messages.error(request, '모든 항목을 입력해 주세요.')
+            return render(request, 'register_page.html')
+
+        # 아이디 중복 체크
+        if User.objects.filter(user_id=register_id).exists():
             messages.error(request, '이미 사용 중인 아이디입니다.')
             return render(request, 'register_page.html')
 
-        register = User()
-        register.user_id = registerID
-        register.user_pw = registerPW
-        register.user_name = registerNAME
-        register.is_admin = registerAdmin == 'on'  # 체크박스는 'on'일 때 True
-
-        register.save()  # DB에 저장
-
-        print('@@@@@@@@@@@@@@@@@@@@@@회원가입 성공@@@@@@@@@@@@@@@@@@@@@@')
+        # 사용자 객체 생성 및 저장
+        try:
+            user = User.objects.create_user(
+                user_id=register_id,
+                user_pw=register_pw,
+                user_name=register_name,
+                is_admin=is_admin
+            )
+            user.save()
+            messages.success(request, '회원가입이 완료되었습니다. 로그인해주세요.')
+            return redirect('login_page')
         
-        # 회원가입 후 로그인 페이지로 리다이렉트
-        messages.success(request, '회원가입이 완료되었습니다. 로그인해주세요.')
-        return redirect('login')
-    else:
-        print('@@@@@@@@@@@@@@@@@@@@@@회원가입 페이지 로드@@@@@@@@@@@@@@@@@@@@@@')
-        return render(request, 'register_page.html')
+        except Exception as e:
+            messages.error(request, f'회원가입에 실패했습니다: {e}')
+            return render(request, 'register_page.html')
+        
+
+# ID찾기 페이지 호출
+def find_id(request):
+    return render(request, 'find_id.html')
+
+# PW찾기 페이지 호출
+def find_pw(request):
+    return render(request, 'find_pw.html')
+
+# 사용설명서 페이지 호출
+def manual(request):
+    return render(request, 'manual.html')

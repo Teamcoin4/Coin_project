@@ -1,84 +1,122 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="ko">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>메인 페이지</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f5f5f5;
-        }
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-        header {
-            background-color: #333;
-            color: white;
-            padding: 15px 0;
-        }
-        .header-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0 20px;
-        }
-        .user-info {
-            display: flex;
-            align-items: center;
-        }
-        .logout-btn {
-            background-color: #f44336;
-            color: white;
-            border: none;
-            padding: 8px 15px;
-            border-radius: 3px;
-            margin-left: 15px;
-            cursor: pointer;
-            text-decoration: none;
-            font-size: 14px;
-        }
-        .logout-btn:hover {
-            background-color: #d32f2f;
-        }
-        .main-content {
-            background-color: white;
-            padding: 30px;
-            margin-top: 20px;
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-        h1 {
-            margin: 0;
-        }
-    </style>
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>코인 거래 메인페이지</title>
+    <!-- ApexCharts 라이브러리 추가 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/apexcharts/3.40.0/apexcharts.min.js"></script>
+    <link rel="stylesheet" href="{% static 'css/index.css' %}" />
+    <script src="{% static 'js/index.js' %}" defer></script>
+  </head>
+  <body>
     <header>
-        <div class="header-content">
-            <h1>메인 페이지</h1>
-            <div class="user-info">
-                <span>{{ user.user_name }}님 환영합니다</span>
-                <a href="{% url 'logout' %}" class="logout-btn">로그아웃</a>
-            </div>
-        </div>
-    </header>
-    
-    <div class="container">
-        <div class="main-content">
-            <h2>로그인 성공!</h2>
-            <p>환영합니다, {{ user.user_name }}님.</p>
-            <p>아이디: {{ user.user_id }}</p>
-            {% if user.is_admin %}
-                <p>관리자 계정입니다.</p>
+        <nav>
+            <ul>
+            <li><a href="{% url 'main_page' %}">홈</a></li>
+            <li><a href="#">투자내역</a></li>
+            <li><a href="#">입출금</a></li>
+            <li><a href="{% url 'manual' %}">사용 설명서</a></li>
+            <li><a href="#">설정</a></li>
+            <li><a href="#">내 정보</a></li>
+            
+            {% if request.user.is_authenticated %}
+                <li><span>{{ request.user.username }}님 환영합니다</span></li>
+                <li><a href="{% url 'logout' %}">로그아웃</a></li>
             {% else %}
-                <p>일반 사용자 계정입니다.</p>
+                <li><a href="{% url 'login_page' %}">로그인</a></li>
+                <li><a href="{% url 'register_page' %}">회원가입</a></li>
             {% endif %}
-        </div>
-    </div>
-</body>
+            {% if request.session.local_user_id %}
+              <p>{{ request.session.local_user_id }}님, 로컬 로그인 중입니다.</p>
+            {% elif user.is_authenticated %}
+              <p>{{ user.username }}님, 소셜 로그인 중입니다.</p>
+            {% else %}
+              <p>로그인 해주세요.</p>
+            {% endif %}
+
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+      <!-- 왼쪽 열 상단: 메인 그래프 -->
+      <section class="coin-graph">
+        <h1>비트코인 (BTC) 차트</h1>
+        <!-- 메인 그래프 자리 -->
+        <div id="chart"></div>
+      </section>
+
+      <!-- 오른쪽 열: 코인 목록 (전체 높이 사용) -->
+      <aside class="coin-list">
+        <h2>코인 목록</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>코인명</th>
+              <th>현재가</th>
+              <th>전일대비</th>
+              <th>거래금</th>
+            </tr>
+          </thead>
+          <tbody id="coin-list-body">
+            <!-- 코인 데이터 들어갈 부분 -->
+          </tbody>
+        </table>
+      </aside>
+
+      <!-- 왼쪽 열 하단 영역: 미니 그래프 및 보유자산 -->
+      <div class="bottom-panel">
+        <!-- 미니 그래프 / 코인 상세 정보 -->
+        <section class="coin-details">
+          <div class="mini-info">
+            <h3>미니 그래프</h3>
+            <div id="mini-chart"></div>
+          </div>
+          <div class="coin-data">
+            <p><strong>고가:</strong> <span id="high-price">61,245.00</span></p>
+            <p><strong>저가:</strong> <span id="low-price">58,752.00</span></p>
+            <p><strong>거래량:</strong> <span id="volume">12,456.78</span></p>
+            <p><strong>거래대금:</strong> <span id="turnover">735,487,952</span></p>
+          </div>
+        </section>
+
+        <!-- 보유자산 및 거래 패널 -->
+        <section class="trade-panel">
+          <h2>보유자산</h2>
+          <div class="trade-buttons">
+            <button class="buy-btn">매수</button>
+            <button class="sell-btn">매도</button>
+          </div>
+          <div class="trade-form">
+            <div class="input-group">
+              <label>가격</label>
+              <input type="number" placeholder="금액 입력" value="59823" />
+              <div class="adjust-buttons">
+                <button>-</button>
+                <button>+</button>
+              </div>
+            </div>
+            <div class="input-group">
+              <label>수량</label>
+              <input type="number" placeholder="직접 입력" />
+            </div>
+            <div class="percentage-buttons">
+              <button>10%</button>
+              <button>25%</button>
+              <button>50%</button>
+              <button>100%</button>
+            </div>
+            <div class="input-group">
+              <label>총액</label>
+              <input type="text" disabled />
+            </div>
+            <button class="trade-action">매수 / 매도</button>
+          </div>
+        </section>
+      </div>
+    </main>
+  </body>
 </html>
