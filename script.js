@@ -1,3 +1,9 @@
+<<<<<<< HEAD
+=======
+
+
+
+>>>>>>> 15cec77dde070bf51d70866b6249d406a96f8e64
 // DOM이 모두 로드된 뒤 실행
 document.addEventListener("DOMContentLoaded", () => {
     // 탭 전환 기능
@@ -108,6 +114,7 @@ document.addEventListener("DOMContentLoaded", () => {
         coinHoldingsList.appendChild(li);
       });
     }
+<<<<<<< HEAD
   });
 
 
@@ -349,3 +356,6 @@ document.addEventListener('DOMContentLoaded', function() {
   // 초기 총액 계산
   calculateTotal();
 });
+=======
+  });
+>>>>>>> 15cec77dde070bf51d70866b6249d406a96f8e64
