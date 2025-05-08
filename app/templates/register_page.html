@@ -1,24 +1,33 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
-<body>
-<form class="form-signin" method="POST" action="/register/">
-  {% csrf_token %} <!-- crsf 보안에 필수 -->
-  <h1 class="h3 mb-3 font-weight-normal">회원가입 테스트 화면</h1>
-  <label for="inputId" class="sr-only">ID</label>
-  <input type="text" id="registerID" name="registerID" class="form-control" placeholder="ID" autofocus=""/>
-  <label for="inputPassword" class="sr-only">Password</label>
-  <input type="password" id="registerPW" name="registerPW" class="form-control" placeholder="Password"/>
-  <label for="inputName" class="sr-only">Name</label>
-  <input type="text" id="registerNAME" name="registerNAME" class="form-control" placeholder="name"/>
-  <div class="checkbox mb-3">
-    <label>
-      <input type="checkbox" name="is_admin" id="is_admin" value="1"> 관리자 권한
-    </label>
-  </div>
-  <button class="btn btn-lg btn-primary btn-block" type="submit">회원가입</button>
-</form>
-</body>
-<hr>
+  <head>
+    <link rel="stylesheet" href="{% static 'css/index.css' %}" />
+  </head>
+  <body>
+    <form class="form-signin" method="POST" action="{% url 'register' %}">
+      {% csrf_token %}
+      <h1 class="h3 mb-3 font-weight-normal">회원가입 테스트 화면</h1>
+      
+      <label for="register_id" class="sr-only">ID</label>
+      <input type="text" id="register_id" name="register_id" class="form-control" placeholder="ID" autofocus=""/>
+      
+      <label for="register_pw" class="sr-only">Password</label>
+      <input type="password" id="register_pw" name="register_pw" class="form-control" placeholder="Password"/>
+      
+      <label for="register_name" class="sr-only">Name</label>
+      <input type="text" id="register_name" name="register_name" class="form-control" placeholder="Name"/>
+      
+      <div class="checkbox mb-3">
+        <label>
+          <input type="checkbox" name="is_admin" id="is_admin" value="True"> 관리자 권한
+        </label>
+      </div>
+      <button class="btn btn-lg btn-primary btn-block" type="submit">회원가입</button>
+    </form>
+  </body>
+  <hr>
   <br/>
   <a href="{% url 'main_page' %}"><button>메인 페이지</button></a>
 </html>

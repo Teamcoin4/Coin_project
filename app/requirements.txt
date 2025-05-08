@@ -1,0 +1,2 @@
+python-dotenv
+# pip install -r requirements.txt 명령어로 한번에 설치 가능

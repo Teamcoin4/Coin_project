@@ -1,0 +1,67 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>입출금 연습</title>
+    <link rel="stylesheet" href="{% static 'css/main.css' %}" />
+  </head>
+  <body>
+    <header>
+      <nav>
+        <ul>
+          <li><a href="{% url 'main_page' %}">홈</a></li>
+          <li><a href="#">투자내역</a></li>
+          <li><a href="#">입출금</a></li>
+          <li><a href="{% url 'manual' %}">사용 설명서</a></li>
+          <li><a href="#">설정</a></li>
+          <li><a href="#">내 정보</a></li>
+          
+          {% if request.session.user_name %}
+            <li><span>{{ request.session.user_name }}님 환영합니다</span></li>
+            <li><a href="{% url 'login_page' %}">로그아웃</a></li>
+          {% else %}
+            <li><a href="{% url 'login_page' %}">로그인</a></li>
+            <li><a href="{% url 'register_page' %}">회원가입</a></li>
+          {% endif %}
+        </ul>
+      </nav>
+    </header>
+
+    <main>
+      <div class="content">
+        <div class="box">입/출금 연습</div>
+        <div class="box">입/출금 설명</div>
+      </div>
+
+      <div class="practice-area">
+        <button>매수 매도 연습</button>
+        <div>
+          <label>보유자산:</label>
+          <button>매수</button>
+          <button>매도</button>
+        </div>
+        <div>
+          <label>가격:</label>
+          <input type="text" placeholder="금액" />
+          <button>-</button>
+          <button>+</button>
+        </div>
+        <div>
+          <label>수량:</label>
+          <button>10%</button>
+          <button>25%</button>
+          <button>50%</button>
+          <button>100%</button>
+          <input type="text" placeholder="직접입력" />
+        </div>
+        <div>
+          <label>총액:</label>
+          <input type="text" />
+        </div>
+        <button>매수 / 매도</button>
+      </div>
+    </main>
+  </body>
+</html>

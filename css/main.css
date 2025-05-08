@@ -214,3 +214,53 @@ main {
 .trade-action:hover {
   background-color: #c82333;
 }
+<<<<<<< HEAD
+
+/* 추가 스타일 - 차트 컨테이너 */
+#chart {
+  width: 100%;
+  height: 400px;
+}
+
+#mini-chart {
+  width: 100%;
+  height: 150px;
+}
+
+.buy-btn {
+  background-color: #28a745 !important;
+}
+
+.buy-btn:hover {
+  background-color: #218838 !important;
+}
+
+.sell-btn {
+  background-color: #dc3545 !important;
+}
+
+.sell-btn:hover {
+  background-color: #c82333 !important;
+}
+
+.coin-data {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.coin-data p {
+  margin: 5px 0;
+  text-align: left;
+}
+
+.positive-change {
+  color: #28a745;
+}
+
+.negative-change {
+  color: #dc3545;
+}
+=======
+>>>>>>> 15cec77dde070bf51d70866b6249d406a96f8e64
