@@ -1,8 +1,7 @@
-<<<<<<< HEAD
 # models.py
 
 from django.db import models
-from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
+from django.contrib.auth.models import BaseUserManager
 
 class LocalUserManager(BaseUserManager):
     def create_user(self, user_id, user_pw, user_name, is_admin=False):
@@ -29,28 +28,9 @@ class LocalUserManager(BaseUserManager):
 
 class LocalUser(models.Model):
     user_id = models.CharField(max_length=100, unique=True)
-=======
-from django.db import models
-
-# 유저 회원가입 데이터
-class User(models.Model):
-    user_id = models.CharField(max_length=100, primary_key=True)
->>>>>>> 15cec77dde070bf51d70866b6249d406a96f8e64
     user_pw = models.CharField(max_length=100)
     user_name = models.CharField(max_length=100)
     is_admin = models.BooleanField(default=False)
 
-<<<<<<< HEAD
     def __str__(self):
         return self.user_name
-=======
-    class Meta:
-        db_table = 'user'     # 테이블 이름 수동 지정
-        managed = False       # Django가 이 테이블을 관리하지 않음
-        app_label = 'app'     # 앱 레이블 명시
-
-    def __str__(self):
-        return 'id : {}, pw : {}, name : {}, admin : {}'.format(
-            self.user_id, self.user_pw, self.user_name, self.is_admin
-        )
->>>>>>> 15cec77dde070bf51d70866b6249d406a96f8e64
