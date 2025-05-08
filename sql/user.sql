@@ -10,14 +10,20 @@ create table User(
     is_admin boolean not null default false
 );
 
+DROP TABLE auth_permission, auth_group, auth_group_permissions,
+           auth_user, auth_user_groups, auth_user_user_permissions,
+           django_content_type;
+
+DROP TABLE auth_permission;
+DROP TABLE auth_group;
+DROP TABLE auth_group_permissions;
+DROP TABLE auth_user;
+DROP TABLE auth_user_groups;
+DROP TABLE auth_user_user_permissions;
+DROP TABLE django_content_type;
+
+
 drop table user;
-DROP TABLE IF EXISTS user;
-DROP TABLE social_auth_association;
-DROP TABLE social_auth_code;
-DROP TABLE social_auth_nonce;
-DROP TABLE social_auth_partial;
-DROP TABLE social_auth_usersocialauth;
-SHOW TABLES LIKE 'app_user';
 
 select * from app_user;
 

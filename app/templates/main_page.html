@@ -22,21 +22,17 @@
             <li><a href="#">설정</a></li>
             <li><a href="#">내 정보</a></li>
             
-            {% if request.user.is_authenticated %}
-                <li><span>{{ request.user.username }}님 환영합니다</span></li>
+            {% if request.user.is_authenticated or request.session.local_user_id %}
+                {% if request.session.local_user_id %}
+                    <li><span>{{ request.session.local_user_id }}님 환영합니다 (로컬)</span></li>
+                {% else %}
+                    <li><span>{{ request.user.username }}님 환영합니다 (소셜)</span></li>
+                {% endif %}
                 <li><a href="{% url 'logout' %}">로그아웃</a></li>
             {% else %}
                 <li><a href="{% url 'login_page' %}">로그인</a></li>
                 <li><a href="{% url 'register_page' %}">회원가입</a></li>
             {% endif %}
-            {% if request.session.local_user_id %}
-              <p>{{ request.session.local_user_id }}님, 로컬 로그인 중입니다.</p>
-            {% elif user.is_authenticated %}
-              <p>{{ user.username }}님, 소셜 로그인 중입니다.</p>
-            {% else %}
-              <p>로그인 해주세요.</p>
-            {% endif %}
-
             </ul>
         </nav>
     </header>
