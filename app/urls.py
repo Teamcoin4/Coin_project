@@ -15,8 +15,10 @@ urlpatterns = [
     path("find_pw/", views.find_pw, name = 'find_pw'),
     path("manual/", views.manual, name = 'manual'),
 
-    # 페이지 처리요청
+    # 기능 처리요청
     path('login/', views.login, name='login'),
     path('register/', views.register, name='register'),
     path('logout/', views.logout, name='logout'),
+    path('coin_value/', views.coin_live_value, name='coin_value'),
+    path('trade_request/' , views.trade_order_request, name='coin_buy_request'),
 ]

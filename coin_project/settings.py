@@ -4,11 +4,13 @@ import os
 from dotenv import load_dotenv
 import json
 
-load_dotenv()
+load_dotenv(os.path.join(os.path.dirname(os.path.dirname(__file__)), 'app', '.env'))
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = os.getenv("SECRET_KEY")
+if not SECRET_KEY:
+    raise Exception("SECRET_KEY is missing! Please set it in the .env file.")
 DEBUG = True
 ALLOWED_HOSTS = []
 
@@ -39,6 +41,13 @@ INSTALLED_APPS = [
     'app',
     'social_django',
 ]
+
+#pip install django-apscheduler
+###scheduler
+APSCHEDULER_DATETIME_FORMAT = "N j, Y, f:s a"  # Default
+
+SCHEDULER_DEFAULT = True
+###
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
