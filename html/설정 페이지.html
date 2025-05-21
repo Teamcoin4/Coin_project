@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <title>설정 페이지</title>
+  <!-- 외부 CSS 연결 -->
+  <link rel="stylesheet" href="../css/Setting.css" />
+</head>
+<body>
+  <!-- 상단 메뉴 영역 -->
+  <header>
+    <nav>
+      <ul class="left-menu">
+        <li><a href="#">홈</a></li>
+          <li><a href="#">투자내역</a></li>
+          <li><a href="#">입출금</a></li>
+          <li><a href="#">사용 설명서</a></li>
+          <li><a href="#">설정</a></li>
+          <li><a href="#">내 정보</a></li>
+          <li><a href="#">로그인/로그아웃</a></li>
+          <li><a href="#">회원가입</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- 메인 컨테이너 -->
+  <main>
+    <!-- 예산 설정 -->
+    <section class="content-box">
+      <label for="budgetValue">현재 예산 :</label>
+      <span id="budgetValue">0</span>
+      <button id="resetBudgetBtn">예산 초기화</button>
+    </section>
+
+    <!-- 언어 설정 -->
+    <section class="content-box">
+      <label for="languageValue">언어 설정 :</label>
+      <span id="languageValue">Korean</span>
+      <button id="changeLanguageBtn">언어 변경</button>
+    </section>
+
+    <!-- 모드 설정 -->
+    <section class="content-box">
+      <label for="modeValue">현재모드 :</label>
+      <span id="modeValue">○○모드</span>
+      <button id="changeModeBtn">모드 변경</button>
+    </section>
+  </main>
+
+  <!-- 외부 스크립트 연결 -->
+  <script src="../js/Setting.js"></script>
+</body>
+</html>

@@ -1,0 +1,235 @@
+
+/* 기본 초기화 */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: sans-serif;
+  background-color: #fff;
+  color: #333;
+}
+
+/* 상단 헤더 스타일 */
+header {
+  border-bottom: 1px solid #ccc;
+  margin-bottom: 20px;
+}
+
+/* 메인 네비게이션 */
+.main-nav, .sub-nav {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 10px 20px;
+}
+
+.main-nav ul, .sub-nav ul {
+  list-style: none;
+  display: flex;
+  gap: 15px;
+}
+
+.main-nav a, .sub-nav a {
+  text-decoration: none;
+  color: #333;
+  padding: 5px;
+}
+
+.main-nav a:hover, .sub-nav a:hover {
+  text-decoration: underline;
+}
+
+.main-nav .left-menu {
+  flex: 1; /* 왼쪽 메뉴는 왼쪽 정렬 */
+  display: flex;
+  gap: 15px;
+}
+
+.main-nav .right-menu {
+  display: flex;
+  gap: 15px;
+  margin-left: auto; /* 오른쪽으로 밀기 */
+}
+
+/* 메인 레이아웃: 좌-중-우 3컬럼 */
+main {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr; /* 비율: 좌1 : 중2 : 우1 */
+  grid-gap: 20px;
+  padding: 0 20px 20px;
+}
+
+/* 좌측 컬럼 */
+.left-column {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* 중앙 컬럼 */
+.center-column {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* 우측 컬럼 */
+.right-column {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* 박스(카드) 공통 스타일 */
+.box {
+  border: 1px solid #ccc;
+  background-color: #f9f9f9;
+  padding: 15px;
+  min-height: 100px;
+  /* 원하는 경우 박스 그림자 추가 가능
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  */
+}
+
+.box.large {
+  min-height: 300px; /* 차트 등 큰 영역을 위한 예시 */
+}
+  
+  body {
+    font-family: sans-serif;
+    color: #333;
+  }
+  
+  /* 네비게이션 바 스타일 */
+  .navbar {
+    background-color: #f0f0f0;
+    padding: 10px;
+  }
+  .navbar ul {
+    list-style: none;
+    display: flex;
+    gap: 10px;
+  }
+  .navbar li {
+    display: inline-block;
+  }
+  .navbar a {
+    text-decoration: none;
+    color: #333;
+    padding: 6px 12px;
+    transition: background-color 0.2s;
+  }
+  .navbar a:hover {
+    background-color: #ddd;
+  }
+  
+  /* 요약 정보 섹션(총 투자자산, 예수금 등) */
+  .info-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #fafafa;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+  }
+  .asset-info p {
+    margin-bottom: 5px;
+  }
+  .login-logout button {
+    padding: 6px 12px;
+    cursor: pointer;
+  }
+  
+  /* 메인 레이아웃 */
+  main {
+    display: flex;
+    padding: 20px;
+    gap: 20px;
+  }
+  
+  /* 왼쪽 패널 (탭, 검색) */
+  .left-panel {
+    width: 20%;
+    min-width: 200px;
+    border-right: 1px solid #ddd;
+    padding-right: 10px;
+  }
+  .tabs {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  .tab-btn {
+    padding: 10px;
+    border: none;
+    background-color: #eee;
+    cursor: pointer;
+    text-align: left;
+    transition: background-color 0.2s;
+  }
+  .tab-btn:hover {
+    background-color: #ddd;
+  }
+  .search-section {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .search-section select,
+  .search-section input,
+  .search-section button {
+    padding: 6px;
+    border: 1px solid #ccc;
+  }
+  
+  /* 중앙 패널 (탭 내용) */
+  .center-panel {
+    width: 50%;
+    min-width: 400px;
+    border-right: 1px solid #ddd;
+    padding: 0 10px;
+  }
+  .content-box {
+    display: none; /* 기본적으로 감춤 */
+  }
+  .content-box.active {
+    display: block; /* 선택된 탭만 보이도록 */
+  }
+  .content-box h3 {
+    margin-bottom: 10px;
+  }
+  .content-box ul {
+    list-style: none;
+    border-top: 1px solid #ccc;
+    padding-top: 10px;
+  }
+  .content-box li {
+    padding: 5px 0;
+    border-bottom: 1px solid #eee;
+  }
+  
+  /* 오른쪽 패널 (보유 코인 목록) */
+  .right-panel {
+    width: 30%;
+    min-width: 250px;
+    padding-left: 10px;
+  }
+  .right-panel h3 {
+    margin-bottom: 10px;
+  }
+  .right-panel ul {
+    list-style: none;
+    border-top: 1px solid #ccc;
+    padding-top: 10px;
+  }
+  .right-panel li {
+    padding: 5px 0;
+    border-bottom: 1px solid #eee;
+  }
+  
+

@@ -1,0 +1,86 @@
+/* 기본 초기화 */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: sans-serif;
+  background-color: #fff;
+  color: #333;
+}
+
+/* 상단 헤더 스타일 */
+header {
+  background-color: #333;
+  padding: 10px 0;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  padding: 0;
+  margin: 0;
+}
+
+nav ul li {
+  margin: 0 15px;
+}
+
+nav ul li a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+nav ul li a:hover {
+  text-decoration: underline;
+}
+
+/* 메인 레이아웃: 좌-중-우 3컬럼 */
+main {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr; /* 비율: 좌1 : 중2 : 우1 */
+  grid-gap: 20px;
+  padding: 0 20px 20px;
+}
+
+/* 좌측 컬럼 */
+.left-column {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* 중앙 컬럼 */
+.center-column {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* 우측 컬럼 */
+.right-column {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* 박스(카드) 공통 스타일 */
+.box {
+  border: 1px solid #ccc;
+  background-color: #f9f9f9;
+  padding: 15px;
+  min-height: 100px;
+  /* 원하는 경우 박스 그림자 추가 가능
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  */
+}
+
+.box.large {
+  min-height: 300px; /* 차트 등 큰 영역을 위한 예시 */
+}
